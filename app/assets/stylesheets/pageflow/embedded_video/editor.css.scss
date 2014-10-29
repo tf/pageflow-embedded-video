@@ -1,0 +1,17 @@
+.embedded_video_status {
+  .state {
+    display: none;
+  }
+
+  &.failed {
+    .failed.state {
+      display: block;
+    }
+  }
+
+  &.processing {
+    .processing.state {
+      display: block;
+    }
+  }
+}

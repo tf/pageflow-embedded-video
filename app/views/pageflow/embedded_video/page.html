@@ -1,0 +1,41 @@
+<div class="blackLayer"></div>
+<div class="content_and_background embedded_video_page">
+  <div class="backgroundArea">
+    <%= background_image_div(configuration, 'background_image') %>
+    <%= shadow_div :opacity => configuration['gradient_opacity'] %>
+  </div>
+
+  <div class="content">
+    <div class="iframeWrapper">
+      <iframe data-src="<%= configuration['embedded_video_id'] %>"
+              style="width: 100%; height: 100%"
+              name="°"
+              scrolling="auto"
+              frameborder="0"
+              align="aus"
+              marginheight="15"
+              marginwidth="15"
+              allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true">
+      </iframe>
+      <div class="iframe_overlay"></div>
+      <div class="bigscreen_toggler" tabindex="4" title="Ansicht vergrößern bzw. verkleinern">Ansicht vergrößern bzw. verkleinern</div>
+    </div>
+    <div class="scroller">
+      <div>
+        <div class="contentWrapper">
+          <div class="page_header">
+            <h2>
+              <span class="tagline"><%= configuration['tagline'] %></span>
+              <span class="title"><%= configuration['title'] %></span>
+              <span class="subtitle"><%= configuration['subtitle'] %></span>
+            </h2>
+            <%= background_image_tag(configuration['background_image_id'], {"class" => "print_image"}) %>
+          </div>
+          <div class="contentText">
+            <p><%= raw configuration['text'] %></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

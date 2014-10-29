@@ -1,0 +1,130 @@
+@include pageflow-page-type(embedded_video);
+
+.embedded_video_page {
+  .iframeWrapper {
+    margin-bottom: 40px;
+    pointer-events: all;
+    height: 400px;
+    position: relative;
+
+    .hidden &, .hideText & {
+      @include transition(0.7s ease);
+    }
+
+    iframe {
+      visibility: hidden;
+      opacity: 0;
+      @include transition(0.7s ease);
+    }
+
+
+    &.widescreened {
+      position: absolute;
+      width: 45%;
+      height: 95%;
+      max-height: 600px;
+      right: 10%;
+      margin-top: 16%;
+      margin-bottom: 0;
+      z-index: 1;
+
+      @media (max-height: 870px) {
+        height: 90%;
+        top: 5%;
+        margin-top: 0;
+      }
+    }
+
+    .hideText & {
+      visibility: hidden;
+      opacity: 0;
+    }
+
+    &:before {
+      padding: 15px;
+      background-color: #191919;
+      background-color: rgba(25,25,25, 0.9);
+      box-shadow: rgba(0,0,0,0.5) 0 0 3px 0px;
+      content: "";
+      position: absolute;
+      top: -15px;
+      left: -15px;
+      width: 100%;
+      z-index: -1;
+      height: 100%;
+
+      @include phone {
+        padding: 15px 0;
+        left: 0;
+      }
+    }
+
+    .iframe_overlay {
+      .has_mobile_platform & {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: all;
+        background-color: transparent;
+      }
+    }
+
+    .text_position_right &.widescreened {
+      right: auto;
+      left: 8%;
+      width: 42%;
+    }
+
+    .bigscreen_toggler {
+      width: 24px;
+      height: 24px;
+      background-image: image-url('fs_close_sprite.png');
+      background-position: 0 0;
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 3px;
+      right: 18px;
+      color: transparent;
+      text-indent: -4000px;
+      opacity: 0;
+      cursor: pointer;
+      display: none;
+      @include transition(opacity 0.5s ease);
+
+      .has_mobile_platform & {
+        display: none !important;
+      }
+    }
+
+    &:hover .bigscreen_toggler, &.hovering .bigscreen_toggler {
+      opacity: 1;
+    }
+
+    .bigScreen & {
+      position: absolute;
+      width: 86% !important;
+      height: 87%;
+      top: 10%;
+      left: 5% !important;
+      z-index: 201;
+      margin-top: 0 !important;
+      max-height: none !important;
+
+      .bigscreen_toggler {
+        background-position: -25px 0;
+      }
+    }
+
+    &.active {
+      iframe {
+        visibility: visible;
+        opacity: 1;
+      }
+      .bigscreen_toggler {
+        display: block;
+      }
+    }
+  }
+}

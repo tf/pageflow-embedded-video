@@ -1,0 +1,12 @@
+de:
+  pageflow:
+    embedded_video:
+      page_type_name: "Embedded Video"
+  activerecord:
+    attributes:
+      "pageflow/page":
+        embedded_video_id: "Video URL"
+        full_width: "Gesamte Breite nutzen"
+      page:
+        embedded_video_id: "Video URL"
+        full_width: "Gesamte Breite nutzen"

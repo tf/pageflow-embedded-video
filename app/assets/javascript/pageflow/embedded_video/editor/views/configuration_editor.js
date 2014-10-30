@@ -12,7 +12,6 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
         displayPropertyName: 'display_embedded_video_url',
         required: true
       });
-      this.input('full_width', pageflow.CheckBoxInputView);
       this.input('background_image_id', pageflow.FileInputView, {collection: pageflow.imageFiles});
       this.input('thumbnail_image_id', pageflow.FileInputView, {
         collection: pageflow.imageFiles,
@@ -21,6 +20,7 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
     });
 
     this.tab('options', function() {
+      this.input('full_width', pageflow.CheckBoxInputView);
       this.group('options');
     });
   }

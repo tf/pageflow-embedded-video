@@ -1,6 +1,6 @@
 # Pageflow Embedded Video
 
-Page type showing embedded Youtube/Vimeo videos.
+Page type showing Youtube/Vimeo videos in an embedded iframe.
 
 ## Installation
 
@@ -9,15 +9,15 @@ Page type showing embedded Youtube/Vimeo videos.
     # Gemfile
     gem 'pageflow-embedded-video'
 
-### Mount the engine:
+bundle install
 
-    # config/routes.rb
-    mount Pageflow::EmbeddedVideo::Engine, :at => '/embedded_video'
 
 ### Register the page type:
 
     # config/initializers/pageflow.rb
-    config.register_page_type(Pageflow::EmbeddedVideo::PageType.new)
+    Pageflow.configure do |config|
+      config.register_page_type(Pageflow::EmbeddedVideo::PageType.new)
+    end
 
 ### Include javascript/stylesheets:
 
@@ -33,19 +33,6 @@ Page type showing embedded Youtube/Vimeo videos.
     # app/assets/stylesheets/pageflow/editor.scss.css;
     @import "pageflow/embedded_video/editor";
 
-
-### Create Proxy
-
-Create a proxy (via Apache, Nginx, ...) from your domain to your configured
-`S3_HOST_ALIAS` to circumvent the same-domain policy. Configure this
-in your Pageflow Embedded Video initializer `config/initializers/pageflow_embedded_video.rb`.
-
-Example conf snippet for Nginx:
-
-    location /embedded_video/ {
-      proxy_pass http://bucketname.s3-website-eu-west-1.amazonaws.com/;
-      proxy_redirect http://bucketname.s3-website-eu-west-1.amazonaws.com/ $scheme://$host/embedded_video/;
-    }
 
 ## Configuration
 

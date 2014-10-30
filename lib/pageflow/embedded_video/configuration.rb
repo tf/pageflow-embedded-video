@@ -7,7 +7,7 @@ module Pageflow
       attr_reader :supported_hosts
 
       def initialize
-        @supported_hosts = %w(http://youtube.com https://youtube.com http://youtu.be https://www.youtube.com http://www.youtube.com)
+        @supported_hosts = %w(https://www.youtube.com http://www.youtube.com http://vimeo.com)
       end
 
     end

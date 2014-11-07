@@ -42,7 +42,7 @@ pageflow.pageType.register('embedded_video', {
     var that = this;
 
     this.listenTo(pageflow.settings, "change:volume", function(model, value) {
-      that._setPlayerVolume(pageElement, value);
+      that._setPlayerVolume(value);
     });
 
     if (pageElement.find('iframe').length === 0) {
@@ -140,11 +140,13 @@ pageflow.pageType.register('embedded_video', {
     var that = this,
         div = document.createElement('div');
 
-    div.setAttribute('id', 'youtube-player');
+    this.playerId = 'youtube-player-' + this._getRandom(url);
+
+    div.setAttribute('id', this.playerId);
     pageElement.find('.iframeWrapper').append(div);
 
     this.ytApiInitialize().done(function() {
-      new YT.Player('youtube-player', {
+      new YT.Player(that.playerId, {
         height: '100%',
         width: '100%',
         videoId: that._getVideoId(url),
@@ -167,11 +169,13 @@ pageflow.pageType.register('embedded_video', {
         iframe = document.createElement('iframe'),
         uri = new URI('//player.vimeo.com/video/');
 
+    this.playerId = 'vimeo-player-' + this._getRandom(url);
+
     uri.filename(that._getVideoId(url));
-    uri.search({api: '1', player_id: 'vimeo-player'});
+    uri.search({api: '1', player_id: this.playerId});
 
     $(iframe).attr({
-      id: 'vimeo-player',
+      id: this.playerId,
       width: '100%',
       height: '100%',
       frameborder: '0',
@@ -196,7 +200,7 @@ pageflow.pageType.register('embedded_video', {
     p.attr('src', url.filename(that._getVideoId(newUrl)));
   },
 
-  _setPlayerVolume: function(pageElement, value) {
+  _setPlayerVolume: function(value) {
     if (this.player) {
       if (typeof this.player.setVolume === 'function') {
         this.player.setVolume(value * 100);
@@ -208,7 +212,7 @@ pageflow.pageType.register('embedded_video', {
 
   _removePlayer: function (pageElement) {
     this.player = null;
-    $('#youtube-player, #vimeo-player', pageElement).remove();
+    $('#' + this.playerId, pageElement).remove();
   },
 
   _getCurrentUrl: function(pageElement) {
@@ -246,5 +250,17 @@ pageflow.pageType.register('embedded_video', {
     }
 
     return '';
+  },
+
+  _getRandom: function(string) {
+    string = string + new Date().getTime();
+    var hash = 0, i, chr, len;
+    if (string === 0) return hash;
+    for (i = 0, len = string.length; i < len; i++) {
+      chr   = string.charCodeAt(i);
+      hash  = ((hash << 5) - hash) + chr;
+      hash |= 0; // Convert to 32bit integer
+    }
+    return hash;
   }
 });

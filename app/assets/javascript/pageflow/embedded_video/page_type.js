@@ -270,6 +270,9 @@ pageflow.pageType.register('embedded_video', {
   },
 
   _removePlayer: function (pageElement) {
+    if (this.player && typeof this.player.destroy === 'function') {
+      this.player.destroy();
+    }
     this.player = null;
     $('#' + this.playerId, pageElement).remove();
   },

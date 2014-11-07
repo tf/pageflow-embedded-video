@@ -26,19 +26,14 @@
 
     &.widescreened {
       position: absolute;
-      width: 43%;
+      width: 45%;
       height: 95%;
       max-height: 600px;
       right: 10%;
       margin-top: 16%;
       margin-bottom: 0;
       z-index: 1;
-
-      @media (max-height: 870px) {
-        height: 90%;
-        top: 5%;
-        margin-top: 0;
-      }
+      padding-top: initial;
     }
 
     &.full_width,

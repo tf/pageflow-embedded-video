@@ -157,11 +157,27 @@ pageflow.pageType.register('embedded_video', {
         events: {
           'onReady': function(event) {
             that.player = event.target;
-            that.player.setVolume(pageflow.settings.get('volume') * 100);
+            that._setPlayerVolume(pageflow.settings.get('volume'));
+          },
+          'onStateChange': function(event) {
+            if (event.data == YT.PlayerState.BUFFERING) {
+              that._clearOverlayTimer(pageElement, event);
+            }
+            else if (event.data == YT.PlayerState.PLAYING) {
+              that._clearOverlayTimer(pageElement, event);
+            }
+            else if (event.data == YT.PlayerState.PAUSED) {
+              that._showOverlay(pageElement, event);
+            }
+            else if (event.data == YT.PlayerState.ENDED) {
+              that._showOverlay(pageElement, event);
+            }
           }
         }
       });
     });
+
+    this._iframeOverlay(pageElement);
   },
 
   _createVimeoPlayer: function(pageElement, url) {
@@ -187,8 +203,51 @@ pageflow.pageType.register('embedded_video', {
     this.player = $f(iframe);
 
     this.player.addEvent('ready', function() {
-      that._setPlayerVolume(pageElement, pageflow.settings.get('volume'));
+      that._setPlayerVolume(pageflow.settings.get('volume'));
+
+      that.player.addEvent('play', function() {
+        that._clearOverlayTimer(pageElement);
+      });
+      that.player.addEvent('pause', function() {
+        that._showOverlay(pageElement);
+      });
+      that.player.addEvent('finish', function() {
+        that._showOverlay(pageElement);
+      });
     });
+
+    this._iframeOverlay(pageElement);
+  },
+
+  _iframeOverlay: function(pageElement) {
+    if(pageflow.features.has('mobile platform')) {
+      var that = this,
+        div = document.createElement('div'),
+        wrapper = pageElement.find('.iframeWrapper');
+
+      div.setAttribute('class', 'iframe_overlay');
+      wrapper.append(div);
+
+      $(div).click(function() {
+        $(this).animate({opacity: 0}, 400).hide(400);
+        that.overlayTimer = setTimeout(function() {
+          that._showAnimated($(div));
+        }, 5000);
+      });
+
+    }
+  },
+
+  _clearOverlayTimer: function () {
+    clearTimeout(this.overlayTimer);
+  },
+
+  _showOverlay: function (pageElement) {
+    this._showAnimated(pageElement.find('div.iframe_overlay'));
+  },
+
+  _showAnimated: function(element) {
+    element.show().animate({opacity: 1}, 400);
   },
 
   _updatePlayerSrc: function(pageElement, configuration) {

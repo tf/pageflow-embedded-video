@@ -41,7 +41,8 @@
       }
     }
 
-    &.full_width, &.full_width.widescreened {
+    &.full_width,
+    &.full_width.widescreened {
       width: 100%;
       float: none;
       position: relative;
@@ -84,39 +85,27 @@
         width: 100%;
         height: 100%;
         pointer-events: all;
-        background-color: transparent;
+        background-color: rgba(25,25,25, 0.9);
+
+        &:before {
+          content: "";
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          width: 142px;
+          height: 100px;
+          z-index: 1;
+          background-image: image-url('pageflow/mobile_overlay.png');
+          @include transform(translate(-70px, -50px));
+        }
       }
     }
 
-    .text_position_right &.widescreened {
+    .text_position_right &.widescreened,
+    .text_position_right &.full_width {
       right: auto;
       left: 8%;
       width: 42%;
-    }
-
-    .bigscreen_toggler {
-      width: 24px;
-      height: 24px;
-      background-image: image-url('fs_close_sprite.png');
-      background-position: 0 0;
-      background-repeat: no-repeat;
-      position: absolute;
-      top: 3px;
-      right: 18px;
-      color: transparent;
-      text-indent: -4000px;
-      opacity: 0;
-      cursor: pointer;
-      display: none;
-      @include transition(opacity 0.5s ease);
-
-      .has_mobile_platform & {
-        display: none !important;
-      }
-    }
-
-    &:hover .bigscreen_toggler, &.hovering .bigscreen_toggler {
-      opacity: 1;
     }
 
     .bigScreen & {
@@ -128,19 +117,12 @@
       z-index: 201;
       margin-top: 0 !important;
       max-height: none !important;
-
-      .bigscreen_toggler {
-        background-position: -25px 0;
-      }
     }
 
     &.active {
       iframe {
         visibility: visible;
         opacity: 1;
-      }
-      .bigscreen_toggler {
-        display: block;
       }
     }
   }

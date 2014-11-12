@@ -3,6 +3,8 @@
 pageflow.pageType.register('embedded_video', _.extend({
 
   enhance: function(pageElement, configuration) {
+    var that = this;
+
     if (pageflow.features.has('mobile platform')) {
       pageElement.find('.close_button, .iframe_container').click(function(event) {
         pageElement.find('.iframe_container').removeClass('show');
@@ -12,6 +14,11 @@ pageflow.pageType.register('embedded_video', _.extend({
 
       this._initPlaceholderImage(pageElement, configuration);
     }
+
+    this.fullscreen = document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+    $(document).on('fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange', function() {
+       that.fullscreen = !that.fullscreen;
+    });
   },
 
   resize: function(pageElement, configuration) {
@@ -28,11 +35,17 @@ pageflow.pageType.register('embedded_video', _.extend({
       iframeWrapper.toggleClass('full_width', fullWidth);
     }
 
-    if ((fullWidth || !widescreened) && !pageflow.features.has('mobile platform')) {
-      iframeWrapper.insertAfter(pageHeader);
-    }
-    else {
-      container.append(iframeWrapper);
+    if (!this.fullscreen) {
+      if ((fullWidth || !widescreened) && !pageflow.features.has('mobile platform')) {
+        if(scroller.find('iframe').length === 0) {
+          iframeWrapper.insertAfter(pageHeader);
+        }
+      }
+      else {
+        if(container.find('iframe').length === 0) {
+          container.append(iframeWrapper);
+        }
+      }
     }
 
     scroller.scroller('refresh');

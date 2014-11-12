@@ -1,32 +1,38 @@
 /*global YT, URI, $f */
 
-pageflow.pageType.register('embedded_video', {
+pageflow.pageType.register('embedded_video', _.extend({
 
   enhance: function(pageElement, configuration) {
+    if (pageflow.features.has('mobile platform')) {
+      pageElement.find('.close_button, .iframe_container').click(function(event) {
+        pageElement.find('.iframe_container').removeClass('show');
+        $('div.menu.index').show();
+        event.stopPropagation();
+      });
+
+      this._initPlaceholderImage(pageElement, configuration);
+    }
   },
 
   resize: function(pageElement, configuration) {
     var iframeWrapper = pageElement.find('.iframeWrapper'),
         pageHeader = pageElement.find('.page_header'),
         scroller = pageElement.find('.scroller'),
+        container = pageElement.find('.iframe_container'),
         widescreened = pageElement.width() > 1430,
-        fullWidth;
+        fullWidth = configuration.full_width;
 
     iframeWrapper.toggleClass('widescreened', widescreened);
 
-    if (typeof configuration.get === 'function') {
-      fullWidth = configuration.get('full_width');
+    if (fullWidth !== undefined) {
+      iframeWrapper.toggleClass('full_width', fullWidth);
     }
-    else {
-      fullWidth = configuration.full_width;
-    }
-    iframeWrapper.toggleClass('full_width', fullWidth);
 
-    if (widescreened && !fullWidth) {
-      iframeWrapper.insertAfter(scroller);
+    if ((fullWidth || !widescreened) && !pageflow.features.has('mobile platform')) {
+      iframeWrapper.insertAfter(pageHeader);
     }
     else {
-      iframeWrapper.insertAfter(pageHeader);
+      container.append(iframeWrapper);
     }
 
     scroller.scroller('refresh');
@@ -48,7 +54,6 @@ pageflow.pageType.register('embedded_video', {
     if (pageElement.find('iframe').length === 0) {
       this._createPlayer(pageElement, configuration);
     }
-
     this.resize(pageElement, configuration);
   },
 
@@ -75,14 +80,14 @@ pageflow.pageType.register('embedded_video', {
       this._updatePlayerSrc(pageElement, configuration);
     }
     else {
-      this._createPlayer(pageElement, configuration);
+      this._createPlayer(pageElement, configuration.attributes);
     }
 
     pageElement.find('.shadow').css({
       opacity: configuration.get('gradient_opacity') / 100
     });
 
-    this.resize(pageElement, configuration);
+    this.resize(pageElement, configuration.attributes);
   },
 
   embeddedEditorViews: function() {
@@ -96,16 +101,8 @@ pageflow.pageType.register('embedded_video', {
 
   _createPlayer: function(pageElement, configuration) {
     var that = this,
-        url;
-
-    if (typeof configuration.get === 'function') {
-      url = configuration.get('display_embedded_video_url');
-    }
-    else {
-      url = configuration.display_embedded_video_url;
-    }
-
-    var origin = this._urlOrigin(url);
+        url = configuration.display_embedded_video_url,
+        origin = this._urlOrigin(url);
 
     this._removePlayer(pageElement);
 
@@ -146,38 +143,21 @@ pageflow.pageType.register('embedded_video', {
     pageElement.find('.iframeWrapper').append(div);
 
     this.ytApiInitialize().done(function() {
-      new YT.Player(that.playerId, {
+      new YT.Player(div, {
         height: '100%',
         width: '100%',
         videoId: that._getVideoId(url),
         playerVars: {
-          fs: false,
           rel: false
         },
         events: {
           'onReady': function(event) {
             that.player = event.target;
             that._setPlayerVolume(pageflow.settings.get('volume'));
-          },
-          'onStateChange': function(event) {
-            if (event.data == YT.PlayerState.BUFFERING) {
-              that._clearOverlayTimer(pageElement, event);
-            }
-            else if (event.data == YT.PlayerState.PLAYING) {
-              that._clearOverlayTimer(pageElement, event);
-            }
-            else if (event.data == YT.PlayerState.PAUSED) {
-              that._showOverlay(pageElement, event);
-            }
-            else if (event.data == YT.PlayerState.ENDED) {
-              that._showOverlay(pageElement, event);
-            }
           }
         }
       });
     });
-
-    this._iframeOverlay(pageElement);
   },
 
   _createVimeoPlayer: function(pageElement, url) {
@@ -195,6 +175,9 @@ pageflow.pageType.register('embedded_video', {
       width: '100%',
       height: '100%',
       frameborder: '0',
+      webkitallowfullscreen: true,
+      mozallowfullscreen: true,
+      allowfullscreen: true,
       src: uri.toString()
     });
 
@@ -204,50 +187,7 @@ pageflow.pageType.register('embedded_video', {
 
     this.player.addEvent('ready', function() {
       that._setPlayerVolume(pageflow.settings.get('volume'));
-
-      that.player.addEvent('play', function() {
-        that._clearOverlayTimer(pageElement);
-      });
-      that.player.addEvent('pause', function() {
-        that._showOverlay(pageElement);
-      });
-      that.player.addEvent('finish', function() {
-        that._showOverlay(pageElement);
-      });
     });
-
-    this._iframeOverlay(pageElement);
-  },
-
-  _iframeOverlay: function(pageElement) {
-    if(pageflow.features.has('mobile platform')) {
-      var that = this,
-        div = document.createElement('div'),
-        wrapper = pageElement.find('.iframeWrapper');
-
-      div.setAttribute('class', 'iframe_overlay');
-      wrapper.append(div);
-
-      $(div).click(function() {
-        $(this).animate({opacity: 0}, 400).hide(400);
-        that.overlayTimer = setTimeout(function() {
-          that._showAnimated($(div));
-        }, 5000);
-      });
-
-    }
-  },
-
-  _clearOverlayTimer: function () {
-    clearTimeout(this.overlayTimer);
-  },
-
-  _showOverlay: function (pageElement) {
-    this._showAnimated(pageElement.find('div.iframe_overlay'));
-  },
-
-  _showAnimated: function(element) {
-    element.show().animate({opacity: 1}, 400);
   },
 
   _updatePlayerSrc: function(pageElement, configuration) {
@@ -275,6 +215,41 @@ pageflow.pageType.register('embedded_video', {
     }
     this.player = null;
     $('#' + this.playerId, pageElement).remove();
+  },
+
+  _initPlaceholderImage: function(pageElement, configuration) {
+    var $div = $(document.createElement('div')),
+      pageHeader = pageElement.find('.page_header'),
+      container = pageElement.find('.iframe_container'),
+      url = configuration.display_embedded_video_url;
+
+    $div.attr('class', 'iframe_overlay');
+    this._setBackgroundImage(url, $div);
+    pageHeader.append($div);
+
+    $div.click(function(event) {
+      event.preventDefault();
+      container.addClass('show');
+      $('div.menu.index').hide();
+    });
+  },
+
+  _setBackgroundImage: function(url, element) {
+    var origin = this._urlOrigin(url),
+        videoId = this._getVideoId(url),
+        imageUrl = '';
+
+    if (origin === 'youtube') {
+      imageUrl = 'http://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
+      element.css('background-image', 'url("' + imageUrl + '")');
+    }
+    else if (origin === 'vimeo') {
+      var src = "http://vimeo.com/api/v2/video/" + videoId + ".json";
+
+      $.getJSON(src, function(data) {
+        element.css('background-image', 'url("' + data[0].thumbnail_large + '")');
+      });
+    }
   },
 
   _getCurrentUrl: function(pageElement) {
@@ -325,4 +300,4 @@ pageflow.pageType.register('embedded_video', {
     }
     return hash;
   }
-});
+}, pageflow.commonPageCssClasses));

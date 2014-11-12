@@ -1,12 +1,15 @@
 @include pageflow-page-type(embedded_video);
 
 .embedded_video_page {
-  .iframeWrapper {
+  .iframeWrapper, .iframe_overlay {
     margin-bottom: 40px;
     pointer-events: all;
     height: initial;
     padding-top: 56.25%;
     position: relative;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
 
     @include phone {
       height: auto;
@@ -18,7 +21,6 @@
     }
 
     iframe {
-      @include transition(0.7s ease);
       position: absolute;
       top: 0;
       left: 0;
@@ -27,13 +29,12 @@
     &.widescreened {
       position: absolute;
       width: 45%;
-      height: 95%;
       max-height: 600px;
       right: 10%;
       margin-top: 16%;
       margin-bottom: 0;
       z-index: 1;
-      padding-top: initial;
+      padding-top: 33%;
     }
 
     &.full_width,
@@ -72,30 +73,6 @@
       }
     }
 
-    .iframe_overlay {
-      .has_mobile_platform & {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        pointer-events: all;
-        background-color: rgba(25,25,25, 0.9);
-
-        &:before {
-          content: "";
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          width: 142px;
-          height: 100px;
-          z-index: 1;
-          background-image: image-url('pageflow/mobile_overlay.png');
-          @include transform(translate(-70px, -50px));
-        }
-      }
-    }
-
     .text_position_right &.widescreened,
     .text_position_right &.full_width {
       right: auto;
@@ -118,6 +95,77 @@
       iframe {
         visibility: visible;
         opacity: 1;
+      }
+    }
+  }
+
+  .iframe_container {
+    .close_button {
+      display: none;
+    }
+
+    .has_mobile_platform & {
+      pointer-events: none;
+      height: 0;
+      padding-top: 0;
+      position: relative;
+      overflow: hidden;
+      opacity: 0;
+      @include transition(opacity 0.5s);
+      z-index: 1;
+
+      &:before {
+        content: "";
+        display: block;
+        top: 0;
+        left: 0;
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: black;
+        opacity: 0.9;
+      }
+
+      &.show {
+        width: 100%;
+        height: 100%;
+        pointer-events: all;
+        overflow: hidden;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        opacity: 1;
+
+        .close_button {
+          display: block;
+        }
+      }
+      .iframeWrapper {
+        @include transform(translate(0, -50%));
+        width: initial;
+        top: 50%;
+        margin-right: 85px;
+
+        @media screen and (orientation: landscape) {
+          top: 60px;
+          padding-top: 0;
+          bottom: 60px;
+          position: absolute;
+          left: 0;
+          right: 0;
+          margin-bottom: 0;
+          @include transform(none);
+        }
+
+        @include mobile {
+          margin-right: 0;
+        }
+
+        &:before {
+          background-color: initial;
+        }
       }
     }
   }

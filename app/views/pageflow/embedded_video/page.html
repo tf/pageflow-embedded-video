@@ -1,13 +1,12 @@
 <div class="blackLayer"></div>
 <div class="content_and_background embedded_video_page">
+
   <div class="backgroundArea">
     <%= background_image_div(configuration, 'background_image') %>
     <%= shadow_div :opacity => configuration['gradient_opacity'] %>
   </div>
 
   <div class="content">
-    <div class="iframeWrapper">
-    </div>
     <div class="scroller">
       <div>
         <div class="contentWrapper">
@@ -24,6 +23,10 @@
           </div>
         </div>
       </div>
+    </div>
+    <div class="iframe_container">
+      <div class="close_button" tabindex="4" title="Embedded Video verlassen">Schließen</div>
+      <div class="iframeWrapper<%= ' full_width' if configuration['full_width'] %>"></div>
     </div>
   </div>
 </div>

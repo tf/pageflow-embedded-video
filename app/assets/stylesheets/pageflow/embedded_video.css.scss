@@ -1,6 +1,14 @@
 @include pageflow-page-type(embedded_video);
 
 .embedded_video_page {
+  .contentText {
+    margin-top: 40px;
+  }
+
+  .widescreened .contentText {
+    margin-top: 0;
+  }
+
   .iframe_overlay {
     .has_mobile_platform & {
       background-repeat: no-repeat;
@@ -37,7 +45,6 @@
         content: "\f194";
       }
 
-      margin-bottom: 40px;
       pointer-events: all;
       height: initial;
       padding-top: 56.25%;
@@ -63,8 +70,7 @@
     }
   }
 
-  .iframeWrapper {
-    margin-bottom: 40px;
+  .iframe_wrapper {
     pointer-events: all;
     height: initial;
     padding-top: 56.25%;
@@ -81,23 +87,12 @@
       width: 45%;
       max-height: 600px;
       right: 10%;
-      margin-top: 16%;
+      margin-top: 0;
+      top: 50%;
+      @include transform(translate(0,-50%));
       margin-bottom: 0;
       z-index: 1;
       padding-top: 33%;
-    }
-
-    &.full_width,
-    &.full_width.widescreened {
-      width: 100%;
-      float: none;
-      position: relative;
-      height: initial;
-      padding-top: 56.25%;
-      margin-bottom: 40px;
-      margin-top: initial;
-      right: initial;
-      max-height: initial;
     }
 
     &:before {
@@ -114,8 +109,7 @@
       height: 100%;
     }
 
-    .text_position_right &.widescreened,
-    .text_position_right &.full_width {
+    .text_position_right &.widescreened {
       right: auto;
       left: 8%;
       width: 42%;
@@ -183,7 +177,8 @@
           display: block;
         }
       }
-      .iframeWrapper {
+
+      .iframe_wrapper {
         @include transform(translate(0, -50%));
         width: initial;
         top: 50%;
@@ -209,5 +204,49 @@
         }
       }
     }
+  }
+
+  .video_caption {
+    color: white;
+    background-color: black;
+    margin-top: 14px;
+    z-index: 0;
+    position: relative;
+    display: block;
+    margin-bottom: 40px;
+
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      padding: 15px;
+      background-color: black;
+      top: -15px;
+      left: -15px;
+      width: 100%;
+      z-index: -1;
+      height: 100%;
+    }
+
+    .inverted & {
+      color: black;
+      background-color: white;
+    }
+
+    .has_mobile_platform & {
+      padding: 15px;
+      margin-top: 0;
+
+      &:before {
+        content: initial;
+      }
+    }
+  }
+
+  .widescreened .video_caption {
+    position: absolute;
+    top: 100%;
+    width: 100%;
+    margin-bottom: 0;
   }
 }

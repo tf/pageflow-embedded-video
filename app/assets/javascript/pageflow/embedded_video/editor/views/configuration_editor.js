@@ -4,6 +4,7 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
 
     this.tab('general', function() {
       this.group('general');
+      this.input('video_caption', pageflow.TextInputView);
     });
 
     this.tab('files', function() {

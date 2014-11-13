@@ -7,6 +7,7 @@ de:
       "pageflow/page":
         embedded_video_id: "Video URL"
         full_width: "Gesamte Breite nutzen"
+        video_caption: "Bildunterschrift"
       page:
         embedded_video_id: "Video URL"
         full_width: "Gesamte Breite nutzen"

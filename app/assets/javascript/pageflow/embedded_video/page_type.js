@@ -247,7 +247,8 @@ pageflow.pageType.register('embedded_video', _.extend({
       container = pageElement.find('.iframe_container'),
       url = configuration.display_embedded_video_url;
 
-    $div.attr('class', 'iframe_overlay');
+    $div.addClass('iframe_overlay ' + this._urlOrigin(url));
+
     this._setBackgroundImage(url, $div);
     pageHeader.append($div);
 

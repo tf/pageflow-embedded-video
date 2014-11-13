@@ -1,20 +1,74 @@
 @include pageflow-page-type(embedded_video);
 
 .embedded_video_page {
-  .iframeWrapper, .iframe_overlay {
+  .iframe_overlay {
+    .has_mobile_platform & {
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background-color: black;
+        opacity: 0.5;
+      }
+
+      &:after {
+        font-family: 'FontAwesome';
+        color: white;
+        font-size: 70px;
+        position: absolute;
+        display: block;
+        width: 100%;
+        text-align: center;
+        top: 50%;
+        margin-top: -35px;
+      }
+
+      &.youtube:after {
+        content: "\f167";
+      }
+
+      &.vimeo:after {
+        content: "\f194";
+      }
+
+      margin-bottom: 40px;
+      pointer-events: all;
+      height: initial;
+      padding-top: 56.25%;
+      position: relative;
+
+      @include phone {
+        height: auto;
+        padding-top: 62.5%;
+      }
+
+      iframe {
+        position: absolute;
+        top: 0;
+        left: 0;
+      }
+
+      &.active {
+        iframe {
+          visibility: visible;
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .iframeWrapper {
     margin-bottom: 40px;
     pointer-events: all;
     height: initial;
     padding-top: 56.25%;
     position: relative;
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-
-    @include phone {
-      height: auto;
-      padding-top: 62.5%;
-    }
 
     iframe {
       position: absolute;
@@ -58,10 +112,6 @@
       width: 100%;
       z-index: -1;
       height: 100%;
-
-      @include phone {
-        content: initial;
-      }
     }
 
     .text_position_right &.widescreened,

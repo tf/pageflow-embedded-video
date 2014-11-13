@@ -8,6 +8,7 @@ pageflow.pageType.register('embedded_video', _.extend({
     if (pageflow.features.has('mobile platform')) {
       pageElement.find('.close_button, .iframe_container').click(function(event) {
         event.stopPropagation();
+        that._pauseVideo();
         pageElement.find('.iframe_container').removeClass('show');
         pageflow.hideText.deactivate();
       });
@@ -218,6 +219,16 @@ pageflow.pageType.register('embedded_video', _.extend({
         this.player.setVolume(value * 100);
       } else if (typeof this.player.api === 'function') {
         this.player.api('setVolume', value);
+      }
+    }
+  },
+
+  _pauseVideo: function() {
+    if (this.player) {
+      if (typeof this.player.pauseVideo === 'function') {
+        this.player.pauseVideo();
+      } else if (typeof this.player.api === 'function') {
+        this.player.api('pause');
       }
     }
   },

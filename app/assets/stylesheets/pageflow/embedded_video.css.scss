@@ -16,10 +16,6 @@
       padding-top: 62.5%;
     }
 
-    .hidden &, .hideText & {
-      @include transition(0.7s ease);
-    }
-
     iframe {
       position: absolute;
       top: 0;
@@ -48,11 +44,6 @@
       margin-top: initial;
       right: initial;
       max-height: initial;
-    }
-
-    .hideText & {
-      visibility: hidden;
-      opacity: 0;
     }
 
     &:before {

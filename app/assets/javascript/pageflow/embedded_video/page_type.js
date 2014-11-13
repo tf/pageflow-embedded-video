@@ -7,9 +7,9 @@ pageflow.pageType.register('embedded_video', _.extend({
 
     if (pageflow.features.has('mobile platform')) {
       pageElement.find('.close_button, .iframe_container').click(function(event) {
-        pageElement.find('.iframe_container').removeClass('show');
-        $('div.menu.index').show();
         event.stopPropagation();
+        pageElement.find('.iframe_container').removeClass('show');
+        pageflow.hideText.deactivate();
       });
 
       this._initPlaceholderImage(pageElement, configuration);
@@ -243,7 +243,7 @@ pageflow.pageType.register('embedded_video', _.extend({
     $div.click(function(event) {
       event.preventDefault();
       container.addClass('show');
-      $('div.menu.index').hide();
+      pageflow.hideText.activate();
     });
   },
 

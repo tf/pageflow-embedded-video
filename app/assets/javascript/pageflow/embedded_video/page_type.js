@@ -16,9 +16,9 @@ pageflow.pageType.register('embedded_video', _.extend({
       this._initPlaceholderImage(pageElement, configuration);
     }
 
-    this.fullscreen = document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement;
+    this.fullscreen = false;
     $(document).on('fullscreenchange mozfullscreenchange webkitfullscreenchange msfullscreenchange', function() {
-       that.fullscreen = !that.fullscreen;
+      that.fullscreen = !that.fullscreen;
     });
   },
 
@@ -33,7 +33,7 @@ pageflow.pageType.register('embedded_video', _.extend({
         fullWidth = configuration.full_width,
         mobile = pageflow.features.has('mobile platform');
 
-    if (fullWidth) {
+    if (fullWidth && !this.fullscreen) {
       widescreened = false;
     }
 
@@ -44,13 +44,22 @@ pageflow.pageType.register('embedded_video', _.extend({
         if (!container.find('iframe').length) {
           container.append(iframeWrapper);
         }
-        mobile ? iframeOverlay.after(videoCaption) : iframeWrapper.append(videoCaption);
       }
       else {
         if (!scroller.find('iframe').length) {
-          iframeWrapper.insertAfter(pageHeader).after(videoCaption);
+          iframeWrapper.insertAfter(pageHeader);
         }
       }
+    }
+
+    if (widescreened) {
+      iframeWrapper.append(videoCaption);
+    }
+    else if (mobile) {
+      iframeOverlay.after(videoCaption);
+    }
+    else {
+      iframeWrapper.after(videoCaption);
     }
 
     scroller.scroller('refresh');

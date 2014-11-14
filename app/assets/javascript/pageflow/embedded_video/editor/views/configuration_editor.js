@@ -4,15 +4,16 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
 
     this.tab('general', function() {
       this.group('general');
-      this.input('video_caption', pageflow.TextInputView);
     });
 
-    this.tab('files', function() {
+    this.tab('content', function() {
       this.input('embedded_video_id', pageflow.UrlInputView, {
         supportedHosts: supportedHosts,
         displayPropertyName: 'display_embedded_video_url',
         required: true
       });
+      this.input('video_caption', pageflow.TextInputView);
+      this.input('full_width', pageflow.CheckBoxInputView);
       this.input('background_image_id', pageflow.FileInputView, {collection: pageflow.imageFiles});
       this.input('thumbnail_image_id', pageflow.FileInputView, {
         collection: pageflow.imageFiles,
@@ -21,7 +22,6 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
     });
 
     this.tab('options', function() {
-      this.input('full_width', pageflow.CheckBoxInputView);
       this.group('options');
     });
   }

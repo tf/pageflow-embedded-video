@@ -11,3 +11,7 @@ de:
       page:
         embedded_video_id: "Video URL"
         full_width: "Gesamte Breite nutzen"
+  editor:
+    configuration_editor:
+      tabs:
+        content: "Inhalt"

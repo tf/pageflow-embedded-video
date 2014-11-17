@@ -6,7 +6,7 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
       this.group('general');
     });
 
-    this.tab('content', function() {
+    this.tab('topic', function() {
       this.input('embedded_video_id', pageflow.UrlInputView, {
         supportedHosts: supportedHosts,
         displayPropertyName: 'display_embedded_video_url',

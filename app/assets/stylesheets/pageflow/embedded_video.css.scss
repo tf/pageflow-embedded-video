@@ -14,12 +14,13 @@
       background-repeat: no-repeat;
       background-size: cover;
       background-position: center;
+      overflow: hidden;
 
       &:before {
         position: absolute;
         top: 0;
-        width: 100%;
-        height: 100%;
+        width: 101%;
+        height: 101%;
         content: "";
         background-color: black;
         opacity: 0.5;

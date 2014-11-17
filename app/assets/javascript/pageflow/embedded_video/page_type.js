@@ -133,6 +133,7 @@ pageflow.pageType.register('embedded_video', _.extend({
       opacity: configuration.get('gradient_opacity') / 100
     });
 
+    this.updateCommonPageCssClasses(pageElement, configuration);
     this.resize(pageElement, configuration.attributes);
   },
 

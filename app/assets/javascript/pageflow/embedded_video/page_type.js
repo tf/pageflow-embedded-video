@@ -82,11 +82,13 @@ pageflow.pageType.register('embedded_video', _.extend({
       this._createPlayer(pageElement, configuration);
     }
     this.resize(pageElement, configuration);
+    this.active = true;
   },
 
   activated: function(pageElement, configuration) {},
 
   deactivating: function(pageElement, configuration) {
+    this.active = false;
     this.stopListening(pageflow.settings);
   },
 
@@ -119,14 +121,16 @@ pageflow.pageType.register('embedded_video', _.extend({
       captionElement.remove();
     }
 
-    var currentUrl = this._getCurrentUrl(pageElement),
-      newUrl = configuration.get('display_embedded_video_url');
+    if (this.active) {
+      var currentUrl = this._getCurrentUrl(pageElement),
+          newUrl = configuration.get('display_embedded_video_url');
 
-    if (this._urlOrigin(currentUrl) === this._urlOrigin(newUrl)) {
-      this._updatePlayerSrc(pageElement, configuration);
-    }
-    else {
-      this._createPlayer(pageElement, configuration.attributes);
+      if (this._urlOrigin(currentUrl) === this._urlOrigin(newUrl)) {
+        this._updatePlayerSrc(pageElement, configuration);
+      }
+      else {
+        this._createPlayer(pageElement, configuration.attributes);
+      }
     }
 
     pageElement.find('.shadow').css({

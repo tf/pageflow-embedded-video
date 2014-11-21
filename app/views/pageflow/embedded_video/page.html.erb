@@ -16,7 +16,7 @@
               <span class="title"><%= configuration['title'] %></span>
               <span class="subtitle"><%= configuration['subtitle'] %></span>
             </h2>
-            <%= background_image_tag(configuration['background_image_id'], {"class" => "print_image"}) %>
+            <%= background_image_tag(configuration['background_image_id'], {class: "print_image"}) %>
           </div>
           <div class="contentText">
             <p><%= raw configuration['text'] %></p>
@@ -27,7 +27,9 @@
     <div class="iframe_container">
       <div class="close_button" tabindex="4" title="Embedded Video verlassen">Schließen</div>
       <div class="iframe_wrapper"></div>
-      <% if configuration['video_caption'].present? %><div class="video_caption"><%= configuration['video_caption'] %></div><% end %>
+      <% if configuration['video_caption'].present? %>
+        <div class="video_caption"><%= configuration['video_caption'] %></div>
+      <% end %>
     </div>
   </div>
 </div>

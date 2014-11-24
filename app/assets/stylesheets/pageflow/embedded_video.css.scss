@@ -251,3 +251,15 @@
     margin-bottom: 0;
   }
 }
+
+.overview .ov_page {
+  &.text_page .pictogram {
+    background-image: image-url('pageflow/ov-embedded_video.png');
+  }
+}
+
+.navigation_mobile {
+  .text_page:after {
+    background-image: image-url('pageflow/embedded_video_sprite.png');
+  }
+}

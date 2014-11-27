@@ -1,6 +1,7 @@
 /*global YT, URI, $f */
 
 pageflow.pageType.register('embedded_video', _.extend({
+  prepareNextPageTimeout: 0,
 
   enhance: function(pageElement, configuration) {
     var that = this;
@@ -78,9 +79,8 @@ pageflow.pageType.register('embedded_video', _.extend({
       that._setPlayerVolume(value);
     });
 
-    if (pageElement.find('iframe').length === 0) {
-      this._createPlayer(pageElement, configuration);
-    }
+    this._createPlayer(pageElement, configuration);
+
     this.resize(pageElement, configuration);
     this.active = true;
   },
@@ -90,10 +90,10 @@ pageflow.pageType.register('embedded_video', _.extend({
   deactivating: function(pageElement, configuration) {
     this.active = false;
     this.stopListening(pageflow.settings);
+    this._removePlayer(pageElement);
   },
 
   deactivated: function(pageElement, configuration) {
-    this._removePlayer(pageElement);
   },
 
   update: function(pageElement, configuration) {
@@ -102,7 +102,8 @@ pageflow.pageType.register('embedded_video', _.extend({
     pageElement.find('h2 .subtitle').text(configuration.get('subtitle') || '');
     pageElement.find('p').html(configuration.get('text') || '');
 
-    var iframeWrapper = pageElement.find('.iframe_wrapper'),
+    var that = this,
+        iframeWrapper = pageElement.find('.iframe_wrapper'),
         captionElement = pageElement.find('.video_caption'),
         caption = configuration.get('video_caption');
 
@@ -129,7 +130,9 @@ pageflow.pageType.register('embedded_video', _.extend({
         this._updatePlayerSrc(pageElement, configuration);
       }
       else {
-        this._createPlayer(pageElement, configuration.attributes);
+        this._removePlayer(pageElement, function() {
+          that._createPlayer(pageElement, configuration.attributes);
+        });
       }
     }
 
@@ -154,8 +157,6 @@ pageflow.pageType.register('embedded_video', _.extend({
     var that = this,
         url = configuration.display_embedded_video_url,
         origin = this._urlOrigin(url);
-
-    this._removePlayer(pageElement);
 
     if (origin === 'youtube') {
       this.ytApiInitialize().done(function () {
@@ -270,12 +271,16 @@ pageflow.pageType.register('embedded_video', _.extend({
     }
   },
 
-  _removePlayer: function (pageElement) {
+  _removePlayer: function (pageElement, callback) {
     if (this.player && typeof this.player.destroy === 'function') {
       this.player.destroy();
     }
     this.player = null;
     $('#' + this.playerId, pageElement).remove();
+
+    if (typeof callback === 'function') {
+      callback();
+    }
   },
 
   _initPlaceholderImage: function(pageElement, configuration) {

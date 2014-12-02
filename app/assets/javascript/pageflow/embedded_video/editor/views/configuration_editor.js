@@ -10,7 +10,8 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
       this.input('embedded_video_id', pageflow.UrlInputView, {
         supportedHosts: supportedHosts,
         displayPropertyName: 'display_embedded_video_url',
-        required: true
+        required: true,
+        permitHttps: true
       });
       this.input('video_caption', pageflow.TextInputView);
       this.input('full_width', pageflow.CheckBoxInputView);

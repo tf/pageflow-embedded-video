@@ -5,6 +5,10 @@
     margin-top: 40px;
   }
 
+  .page_header h2 .title {
+    max-width: 500px;
+  }
+
   .widescreened .contentText {
     margin-top: 0;
   }
@@ -97,14 +101,14 @@
     }
 
     &:before {
-      padding: 15px;
+      padding: 10px;
       background-color: #191919;
       background-color: rgba(25,25,25, 0.9);
       box-shadow: rgba(0,0,0,0.5) 0 0 3px 0px;
       content: "";
       position: absolute;
-      top: -15px;
-      left: -15px;
+      top: -10px;
+      left: -10px;
       width: 100%;
       z-index: -1;
       height: 100%;
@@ -209,8 +213,7 @@
 
   .video_caption {
     color: white;
-    background-color: black;
-    margin-top: 14px;
+    margin-top: 20px;
     z-index: 0;
     position: relative;
     display: block;
@@ -220,10 +223,11 @@
       content: "";
       display: block;
       position: absolute;
-      padding: 15px;
+      padding: 10px;
       background-color: black;
-      top: -15px;
-      left: -15px;
+      background-color: rgba(0,0,0,0.9);
+      top: -10px;
+      left: -10px;
       width: 100%;
       z-index: -1;
       height: 100%;

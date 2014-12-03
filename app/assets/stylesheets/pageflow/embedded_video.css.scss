@@ -257,13 +257,13 @@
 }
 
 .overview .ov_page {
-  &.text_page .pictogram {
+  &.embedded_video .pictogram {
     background-image: image-url('pageflow/ov-embedded_video.png');
   }
 }
 
 .navigation_mobile {
-  .text_page:after {
+  .embedded_video:after {
     background-image: image-url('pageflow/embedded_video_sprite.png');
   }
 }

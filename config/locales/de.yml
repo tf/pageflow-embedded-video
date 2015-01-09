@@ -2,6 +2,7 @@ de:
   pageflow:
     embedded_video:
       page_type_name: "Embedded Video"
+      page_type_category_name: "Video"
   activerecord:
     attributes:
       "pageflow/page":

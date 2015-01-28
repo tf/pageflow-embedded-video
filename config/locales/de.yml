@@ -1,18 +1,45 @@
 de:
-  pageflow:
-    embedded_video:
-      page_type_name: "Embedded Video"
-      page_type_category_name: "Video"
   activerecord:
     attributes:
-      "pageflow/page":
-        embedded_video_id: "Video URL"
-        full_width: "Gesamte Breite nutzen"
-        video_caption: "Bildunterschrift"
+      pageflow/page:
+        embedded_video_id: Video URL
+        full_width: Gesamte Breite nutzen
+        video_caption: Bildunterschrift
+  pageflow:
+    embedded_video:
+      help_entries:
+        page_type:
+          menu_item: Embedded Video
+          text: ! '# Embedded Video
+
+
+            Bettet ein externes Video von YouTube oder Vimeo ein
+
+
+            Falls Du neben eigenem Filmmaterial auch externe Videos verwenden möchtest, kannst
+
+            Du diese über eine Video-URL integrieren und zudem mit einer Bildunterschrift versehen.
+
+            Aus technischen Gründen wird das Bild in einem Rahmen in die Seite
+
+            eingebunden, der sich der Größe des Bildschirms und dem Textfluss automatisch anpasst, ihn aber nie komplett ausfüllt.
+
+            Deshalb besteht bei diesem Seitentyp die Möglichkeit, ein zusätzliches Hintergrundbild
+
+            einzufügen, beispielsweise um einen visuellen Rahmen zu schaffen.
+
+
+            Es können Videos der beiden Plattformen YouTube und Vimeo verwendet werden.
+
+
+            Typische Anwendungsbeispiele: Einbinden von Playlists, Trailern, Kurzfilmen'
       page:
-        embedded_video_id: "Video URL"
-        full_width: "Gesamte Breite nutzen"
-  editor:
-    configuration_editor:
-      tabs:
-        topic: "Inhalt"
+        close: Schließen
+        close_title: Embedded Video verlassen
+      page_type_category_name: Video
+      page_type_description: Bettet ein externes Video von YouTube oder Vimeo ein
+      page_type_name: Embedded Video
+    ui:
+      configuration_editor:
+        tabs:
+          topic: Inhalt

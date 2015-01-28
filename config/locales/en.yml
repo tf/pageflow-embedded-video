@@ -1,0 +1,34 @@
+en:
+  activerecord:
+    attributes:
+      pageflow/page:
+        embedded_video_id: Video URL
+        full_width: Full width
+        video_caption: Caption
+  pageflow:
+    embedded_video:
+      help_entries:
+        page_type:
+          menu_item: Embedded Video
+          text: ! '# Embedded Video
+
+
+            Embeds an external video from Youtube or Vimeo
+
+
+            If you want to use external videos beside your own material, you can embed the video-URL and give it a caption. For technical reasons the video is embedded in a frame, that is fitting only parts of the  screen. You can therefore add a background-image, which creates a visual frame. You can use videos from Youtube and Vimeo.
+
+
+            Examples of application: integration of playlists, trailer or short movies
+
+'
+      page:
+        close: Close
+        close_title: Leave embedded video
+      page_type_category_name: Video
+      page_type_description: Embed YouTube or Vimeo videos
+      page_type_name: Embedded Video
+    ui:
+      configuration_editor:
+        tabs:
+          topic: Contents

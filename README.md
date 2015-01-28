@@ -44,3 +44,9 @@ Example:
     Pageflow::EmbeddedVideo.configure do |config|
       config.foo = 'bar'
     end
+
+## Contributing Locales
+
+Edit the translations directly on the
+[pageflow-embedded-video](http://www.localeapp.com/projects/public?search=tf/pageflow-embedded-video)
+locale project.

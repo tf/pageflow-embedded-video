@@ -16,7 +16,7 @@ bundle install
 
     # config/initializers/pageflow.rb
     Pageflow.configure do |config|
-      config.register_page_type(Pageflow::EmbeddedVideo::PageType.new)
+      config.register_page_type(Pageflow::EmbeddedVideo.page_type)
     end
 
 ### Include javascript/stylesheets:

@@ -4,22 +4,21 @@ Page type showing Youtube/Vimeo videos in an embedded iframe.
 
 ## Installation
 
-### Add this line to your application's Gemfile:
+Add this line to your application's Gemfile:
 
     # Gemfile
     gem 'pageflow-embedded-video'
 
-bundle install
+Run `bundle install`
 
-
-### Register the page type:
+Register the page type:
 
     # config/initializers/pageflow.rb
     Pageflow.configure do |config|
       config.register_page_type(Pageflow::EmbeddedVideo.page_type)
     end
 
-### Include javascript/stylesheets:
+Include javascript/stylesheets:
 
     # app/assets/javascripts/pageflow/application.js
     //= require "pageflow/embedded_video"
@@ -42,8 +41,18 @@ Configure Pageflow Embedded Video by creating an initializer in your app
 Example:
 
     Pageflow::EmbeddedVideo.configure do |config|
-      config.foo = 'bar'
+      # Remove items to disallow hosts
+      # config.supported_hosts = %w(https://www.youtube.com http://www.youtube.com http://vimeo.com)
     end
+
+## Troubleshooting
+
+If you run into problems while installing the page type, please also refer to the
+[Troubleshooting](https://github.com/codevise/pageflow/wiki/Troubleshooting) wiki
+page in the [Pageflow  repository](https://github.com/codevise/pageflow). If that
+doesn't help, consider
+[filing an issue](https://github.com/codevise/pageflow-embedded-video/issues).
+
 
 ## Contributing Locales
 

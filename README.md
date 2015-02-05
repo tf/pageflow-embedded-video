@@ -28,10 +28,10 @@ Include javascript/stylesheets:
     # app/assets/javascripts/pageflow/editor.js
     //= require pageflow/embedded_video/editor
 
-    # app/assets/stylesheets/pageflow/application.scss.css;
+    # app/assets/stylesheets/pageflow/application.css.scss;
     @import "pageflow/embedded_video";
 
-    # app/assets/stylesheets/pageflow/editor.scss.css;
+    # app/assets/stylesheets/pageflow/editor.css.acss;
     @import "pageflow/embedded_video/editor";
 
 

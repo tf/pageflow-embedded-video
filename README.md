@@ -31,7 +31,7 @@ Include javascript/stylesheets:
     # app/assets/stylesheets/pageflow/application.css.scss;
     @import "pageflow/embedded_video";
 
-    # app/assets/stylesheets/pageflow/editor.css.acss;
+    # app/assets/stylesheets/pageflow/editor.css.scss;
     @import "pageflow/embedded_video/editor";
 
 

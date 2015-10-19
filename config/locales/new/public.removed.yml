@@ -1,0 +1,13 @@
+de:
+  pageflow:
+    embedded_video:
+      page:
+        close: NOT_USED
+        close_title: NOT_USED
+
+en:
+  pageflow:
+    embedded_video:
+      page:
+        close: NOT_USED
+        close_title: NOT_USED

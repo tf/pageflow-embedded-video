@@ -1,6 +1,19 @@
 @include pageflow-page-type(embedded_video);
 
 .embedded_video_page {
+  /*
+    HACK: We need to set the hide_content_with_text css class on the
+    page's section, to make the menu button and hide text text
+    indicator disappear on mobile. But this also causes the content
+    to be hidden, which we undo in the following. This should be
+    decoupled in the pageflow gem.
+   */
+  .content {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: all !important;
+  }
+
   .contentText {
     margin-top: 40px;
   }

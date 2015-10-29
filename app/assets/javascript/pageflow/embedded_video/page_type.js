@@ -6,7 +6,7 @@ pageflow.pageType.register('embedded_video', _.extend({
   enhance: function(pageElement, configuration) {
     var that = this;
 
-    pageElement.addClass('hide_content_with_text');
+    pageElement.addClass('no_hidden_text_indicator');
 
     if (pageflow.features.has('mobile platform')) {
       pageElement.find('.close_button, .iframe_container').click(function(event) {

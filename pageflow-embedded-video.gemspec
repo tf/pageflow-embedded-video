@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |spec|
   spec.name          = "pageflow-embedded-video"
-  spec.version       = "0.1.1"
+  spec.version       = "0.2.0.alpha"
   spec.authors       = ["Stefan Schöttelndreyer"]
   spec.email         = ["sschoettelndreyer@codevise.de"]
   spec.summary       = "Pagetype for embedded youtube/vimeo videos"

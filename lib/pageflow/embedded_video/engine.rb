@@ -1,3 +1,5 @@
+require 'pageflow-public-i18n'
+
 module Pageflow
   module EmbeddedVideo
     class Engine < Rails::Engine

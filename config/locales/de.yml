@@ -10,32 +10,7 @@ de:
       help_entries:
         page_type:
           menu_item: Embedded Video
-          text: ! '# Embedded Video
-
-
-            Bettet ein externes Video von YouTube oder Vimeo ein
-
-
-            Falls Du neben eigenem Filmmaterial auch externe Videos verwenden möchtest, kannst
-
-            Du diese über eine Video-URL integrieren und zudem mit einer Bildunterschrift versehen.
-
-            Aus technischen Gründen wird das Bild in einem Rahmen in die Seite
-
-            eingebunden, der sich der Größe des Bildschirms und dem Textfluss automatisch anpasst, ihn aber nie komplett ausfüllt.
-
-            Deshalb besteht bei diesem Seitentyp die Möglichkeit, ein zusätzliches Hintergrundbild
-
-            einzufügen, beispielsweise um einen visuellen Rahmen zu schaffen.
-
-
-            Es können Videos der beiden Plattformen YouTube und Vimeo verwendet werden.
-
-
-            Typische Anwendungsbeispiele: Einbinden von Playlists, Trailern, Kurzfilmen'
-      page:
-        close: Schließen
-        close_title: Embedded Video verlassen
+          text: ! "# Embedded Video\n\n*Bettet ein externes Video von YouTube oder Vimeo ein*\n    \nFalls Du neben eigenem Filmmaterial auch externe Videos verwenden möchtest, kannst\nDu diese über eine Video-URL integrieren und zudem mit einer Bildunterschrift versehen.\nAus technischen Gründen wird das Bild in einem Rahmen in die Seite\neingebunden, der sich der Größe des Bildschirms und dem Textfluss automatisch anpasst, ihn aber nie komplett ausfüllt.\nDeshalb besteht bei diesem Seitentyp die Möglichkeit, ein zusätzliches Hintergrundbild\neinzufügen, beispielsweise um einen visuellen Rahmen zu schaffen.\n\nEs können Videos der beiden Plattformen YouTube und Vimeo verwendet werden.\n\nTypische Anwendungsbeispiele: Einbinden von Playlists, Trailern, Kurzfilmen"
       page_type_category_name: Video
       page_type_description: Bettet ein externes Video von YouTube oder Vimeo ein
       page_type_name: Embedded Video

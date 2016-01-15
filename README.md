@@ -34,6 +34,8 @@ Include javascript/stylesheets:
     # app/assets/stylesheets/pageflow/editor.css.scss;
     @import "pageflow/embedded_video/editor";
 
+    # app/assets/stylesheets/pageflow/themes/default.css.scss
+    @import "pageflow/embedded_video/themes/default";
 
 ## Configuration
 

@@ -255,15 +255,3 @@
     margin-bottom: 0;
   }
 }
-
-.overview .ov_page {
-  &.embedded_video .pictogram {
-    background-image: image-url('pageflow/ov-embedded_video.png');
-  }
-}
-
-.navigation_mobile {
-  .embedded_video:after {
-    background-image: image-url('pageflow/embedded_video_sprite.png');
-  }
-}

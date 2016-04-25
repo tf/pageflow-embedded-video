@@ -125,13 +125,7 @@ pageflow.pageType.register('embedded_video', _.extend({
     }
 
     if (this.active) {
-      var currentUrl = this._getCurrentUrl(pageElement),
-          newUrl = configuration.get('display_embedded_video_url');
-
-      if (this._urlOrigin(currentUrl) === this._urlOrigin(newUrl)) {
-        this._updatePlayerSrc(pageElement, configuration);
-      }
-      else {
+      if (configuration.hasChanged('display_embedded_video_url')) {
         this._removePlayer(pageElement, function() {
           that._createPlayer(pageElement, configuration.attributes);
         });
@@ -202,7 +196,8 @@ pageflow.pageType.register('embedded_video', _.extend({
         width: '100%',
         videoId: that._getVideoId(url),
         playerVars: {
-          rel: false
+          rel: false,
+          start: that._getVideoStartTime(url)
         },
         events: {
           'onReady': function(event) {
@@ -242,15 +237,6 @@ pageflow.pageType.register('embedded_video', _.extend({
     this.player.addEvent('ready', function() {
       that._setPlayerVolume(pageflow.settings.get('volume'));
     });
-  },
-
-  _updatePlayerSrc: function(pageElement, configuration) {
-    var that = this,
-        newUrl = configuration.get('display_embedded_video_url'),
-        p = pageElement.find('iframe'),
-        url = new URI(p.attr('src'));
-
-    p.attr('src', url.filename(that._getVideoId(newUrl)));
   },
 
   _setPlayerVolume: function(value) {
@@ -321,10 +307,6 @@ pageflow.pageType.register('embedded_video', _.extend({
     }
   },
 
-  _getCurrentUrl: function(pageElement) {
-    return pageElement.find('iframe').attr('src');
-  },
-
   _urlOrigin: function(url) {
     var uri = new URI(url),
       domain = uri.domain(true);
@@ -356,6 +338,32 @@ pageflow.pageType.register('embedded_video', _.extend({
     }
 
     return '';
+  },
+
+  _getVideoStartTime: function(url) {
+    var query = new URI(url).query();
+    var params = query.split('&');
+    var that = this;
+
+    return _.reduce(params, function(result, param) {
+      var parts = param.split('=');
+
+      if (parts[0] === 't') {
+        return that._timestampToSeconds(parts[1] || '');
+      }
+
+      return result;
+    }, 0);
+  },
+
+  _timestampToSeconds: function(timestamp) {
+    if (timestamp.match(/\d+m(\d+s)?/)) {
+      var parts = timestamp.split('m');
+      return parseInt(parts[0], 10) * 60 + parseInt(parts[1] || 0, 10);
+    }
+    else {
+      return 0;
+    }
   },
 
   _getRandom: function(string) {

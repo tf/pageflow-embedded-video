@@ -1,12 +1,15 @@
 # coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'pageflow/embedded_video/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "pageflow-embedded-video"
-  spec.version       = "0.2.0.alpha"
+  spec.version       = Pageflow::EmbeddedVideo::VERSION
   spec.authors       = ["Stefan Schöttelndreyer"]
   spec.email         = ["sschoettelndreyer@codevise.de"]
   spec.summary       = "Pagetype for embedded youtube/vimeo videos"
-  spec.homepage      = ""
+  spec.homepage      = "https://github.com/codevise/pageflow-embedded-video"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files`.split($/)
@@ -21,4 +24,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency "bundler"
   spec.add_development_dependency "rake"
   spec.add_development_dependency "webmock"
+
+  # Semantic versioning rake tasks
+  spec.add_development_dependency 'semmy', '~> 0.2'
 end

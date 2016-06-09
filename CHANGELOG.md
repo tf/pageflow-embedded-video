@@ -1,5 +1,13 @@
 # CHANGELOG
 
+### Version 0.2.1
+
+2016-06-09
+
+[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/v0.2.0...v0.2.1)
+
+- Do not depend on pre version of pageflow.
+
 ### Version 0.2.0
 
 2016-06-09

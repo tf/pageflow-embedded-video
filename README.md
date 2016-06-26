@@ -17,13 +17,13 @@ Register the page type:
 
     # config/initializers/pageflow.rb
     Pageflow.configure do |config|
-      config.register_page_type(Pageflow::EmbeddedVideo.page_type)
+      config.page_types.register(Pageflow::EmbeddedVideo.page_type)
     end
 
 Include javascript/stylesheets:
 
     # app/assets/javascripts/pageflow/application.js
-    //= require "pageflow/embedded_video"
+    //= require pageflow/embedded_video
 
     # app/assets/javascripts/pageflow/editor.js
     //= require pageflow/embedded_video/editor
@@ -39,14 +39,15 @@ Include javascript/stylesheets:
 
 ## Configuration
 
-Configure Pageflow Embedded Video by creating an initializer in your app
+Optionally, configure Pageflow Embedded Video by creating an initializer in your app
 `config/initializers/pageflow_embedded_video.rb`.
 
 Example:
 
     Pageflow::EmbeddedVideo.configure do |config|
       # Remove items to disallow hosts
-      # config.supported_hosts = %w(https://www.youtube.com http://www.youtube.com http://vimeo.com)
+      # The listed hosts are supported by default:
+      # config.supported_hosts = %w(https://www.youtube.com http://www.youtube.com https://vimeo.com http://vimeo.com)
     end
 
 ## Troubleshooting

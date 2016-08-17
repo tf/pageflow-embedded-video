@@ -12,7 +12,7 @@ pageflow.pageType.register('embedded_video', _.extend({
       pageElement.find('.close_button, .iframe_container').click(function(event) {
         event.stopPropagation();
         that._pauseVideo();
-        pageElement.find('.iframe_container').removeClass('show');
+        pageElement.find('.iframe_container, .close_button').removeClass('show');
         pageflow.hideText.deactivate();
       });
 
@@ -288,7 +288,7 @@ pageflow.pageType.register('embedded_video', _.extend({
   _initPlaceholderImage: function(pageElement, configuration) {
     var $div = $(document.createElement('div')),
       pageHeader = pageElement.find('.page_header'),
-      container = pageElement.find('.iframe_container'),
+      containerAndCloseButton = pageElement.find('.iframe_container, .close_button'),
       url = configuration.display_embedded_video_url;
 
     $div.addClass('iframe_overlay ' + this._urlOrigin(url));
@@ -298,7 +298,7 @@ pageflow.pageType.register('embedded_video', _.extend({
 
     $div.click(function(event) {
       event.preventDefault();
-      container.addClass('show');
+      containerAndCloseButton.addClass('show');
       pageflow.hideText.activate();
     });
   },

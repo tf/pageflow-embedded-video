@@ -139,11 +139,15 @@
     }
   }
 
-  .iframe_container {
-    .close_button {
-      display: none;
-    }
+  .close_button {
+    display: none;
 
+    .has_mobile_platform &.show {
+      display: block;
+    }
+  }
+
+  .iframe_container {
     .has_mobile_platform & {
       pointer-events: none;
       height: 0;
@@ -177,10 +181,6 @@
         right: 0;
         bottom: 0;
         opacity: 1;
-
-        .close_button {
-          display: block;
-        }
       }
 
       .iframe_wrapper {

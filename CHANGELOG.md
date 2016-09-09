@@ -1,10 +1,15 @@
 # CHANGELOG
 
-### Changes on `master`
+### Version 0.3.0
 
-[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/v0.2.0...master)
+2016-09-09
 
-None so far.
+[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/v0.2.0...v0.3.0)
+
+- Allow youtube urls with timecode
+  ([#14](https://github.com/codevise/pageflow-embedded-video/pull/14))
+- Align close button with slim player control
+  ([#13](https://github.com/codevise/pageflow-embedded-video/pull/13))
 
 ### Version 0.2.0
 

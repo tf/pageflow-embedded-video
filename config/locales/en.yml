@@ -10,8 +10,8 @@ en:
       help_entries:
         page_type:
           menu_item: Embedded Video
-          text: ! "# Embedded Video\n\n*Embeds an external video from Youtube or Vimeo*\n    \nIf you want to use external videos beside your own material, you can embed the video-URL and give it a caption. For technical reasons the video is embedded in a frame, that is fitting only parts of the  screen. You can therefore add a background-image, which creates a visual frame. You can use videos from Youtube and Vimeo.\n\nExamples of application: integration of playlists, trailer or short movies"
-      page_type_category_name: Video
+          text: "# Embedded Video\n\n*Embeds an external video from Youtube or Vimeo*\n    \nIf you want to use external videos beside your own material, you can embed the video-URL and give it a caption. For technical reasons the video is embedded in a frame, that is fitting only parts of the  screen. You can therefore add a background-image, which creates a visual frame. You can use videos from Youtube and Vimeo.\n\nExamples of application: integration of playlists, trailer or short movies"
+      page_type_category_name: Media
       page_type_description: Embed YouTube or Vimeo videos
       page_type_name: Embedded Video
     ui:

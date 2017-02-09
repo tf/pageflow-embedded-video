@@ -15,7 +15,7 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
       });
       this.input('video_caption', pageflow.TextInputView);
       this.input('full_width', pageflow.CheckBoxInputView);
-      this.input('background_image_id', pageflow.FileInputView, {collection: pageflow.imageFiles});
+      this.group('background');
       this.input('thumbnail_image_id', pageflow.FileInputView, {
         collection: pageflow.imageFiles,
         imagePositioning: false

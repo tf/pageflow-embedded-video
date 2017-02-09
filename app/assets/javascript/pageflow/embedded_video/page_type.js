@@ -1,6 +1,6 @@
 /*global YT, URI, $f */
 
-pageflow.pageType.register('embedded_video', _.extend({
+pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
   prepareNextPageTimeout: 0,
 
   enhance: function(pageElement, configuration) {
@@ -70,10 +70,6 @@ pageflow.pageType.register('embedded_video', _.extend({
 
   prepare: function(pageElement, configuration) {},
 
-  preload: function(pageElement, configuration) {
-    return pageflow.preload.backgroundImage(pageElement.find('.background_image'));
-  },
-
   activating: function(pageElement, configuration) {
     var that = this;
 
@@ -136,17 +132,7 @@ pageflow.pageType.register('embedded_video', _.extend({
       opacity: configuration.get('gradient_opacity') / 100
     });
 
-    this.updateCommonPageCssClasses(pageElement, configuration);
     this.resize(pageElement, configuration.attributes);
-  },
-
-  embeddedEditorViews: function() {
-    return {
-      '.background_image': {
-        view: pageflow.BackgroundImageEmbeddedView,
-        options: {propertyName: 'background_image_id'}
-      }
-    };
   },
 
   _createPlayer: function(pageElement, configuration) {
@@ -377,4 +363,4 @@ pageflow.pageType.register('embedded_video', _.extend({
     }
     return hash;
   }
-}, pageflow.commonPageCssClasses));
+});

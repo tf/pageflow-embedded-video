@@ -26,24 +26,25 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
   },
 
   resize: function(pageElement, configuration) {
-    var iframeWrapper = pageElement.find('.iframe_wrapper'),
-        pageHeader = pageElement.find('.page_header'),
-        scroller = pageElement.find('.scroller'),
-        container = pageElement.find('.iframe_container'),
-        iframeOverlay = pageElement.find('.iframe_overlay'),
-        videoCaption = pageElement.find('.video_caption'),
-        widescreened = pageElement.width() > 1430,
-        fullWidth = configuration.full_width,
-        mobile = pageflow.features.has('mobile platform');
+    var iframeWrapper = pageElement.find('.iframe_wrapper');
+    var pageHeader = pageElement.find('.page_header');
+    var pageTitle = pageHeader.find('.title');
+    var scroller = pageElement.find('.scroller');
+    var container = pageElement.find('.iframe_container');
+    var iframeOverlay = pageElement.find('.iframe_overlay');
+    var videoCaption = pageElement.find('.video_caption');
 
-    if (fullWidth && !this.fullscreen) {
-      widescreened = false;
-    }
+    var mobile = pageflow.features.has('mobile platform');
+    var allowSplitLayout = !configuration.full_width || this.fullscreen;
 
-    iframeWrapper.add(scroller).toggleClass('widescreened', widescreened);
+    pageTitle.toggleClass('title-for_split_layout', allowSplitLayout);
+
+    var splitLayout = this.wideEnoughForSplitLayout(pageElement) && allowSplitLayout;
+
+    iframeWrapper.add(scroller).toggleClass('widescreened', splitLayout);
 
     if (!this.fullscreen) {
-      if (widescreened || mobile) {
+      if (splitLayout || mobile) {
         if (!container.find('iframe').length) {
           container.append(iframeWrapper);
         }
@@ -55,7 +56,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
       }
     }
 
-    if (widescreened) {
+    if (splitLayout) {
       iframeWrapper.append(videoCaption);
     }
     else if (mobile) {
@@ -66,6 +67,21 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     }
 
     scroller.scroller('refresh');
+  },
+
+  wideEnoughForSplitLayout: function(pageElement) {
+    var pageTitle = pageElement.find('.page_header .title');
+
+    var pageTitleClientRect = pageTitle[0].getBoundingClientRect();
+    var pageClientRect = pageElement[0].getBoundingClientRect();
+
+    var spaceRightFromTitle = pageClientRect.right - pageTitleClientRect.right;
+    var spaceLeftFromTitle = pageTitleClientRect.left - pageClientRect.left;
+    var leftPositionedEmbedWidth = pageClientRect.width * 0.51;
+    var rightPositionedEmbedWidth = pageClientRect.width * 0.55;
+
+    return (spaceLeftFromTitle >= leftPositionedEmbedWidth ||
+            spaceRightFromTitle >= rightPositionedEmbedWidth);
   },
 
   prepare: function(pageElement, configuration) {},

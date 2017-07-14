@@ -37,7 +37,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     var mobile = pageflow.features.has('mobile platform');
     var allowSplitLayout = !configuration.full_width || this.fullscreen;
 
-    pageTitle.toggleClass('title-for_split_layout', allowSplitLayout);
+    pageElement.toggleClass('page-with_split_layout', allowSplitLayout);
 
     var splitLayout = this.wideEnoughForSplitLayout(pageElement) && allowSplitLayout;
 

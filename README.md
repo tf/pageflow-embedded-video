@@ -28,13 +28,13 @@ Include javascript/stylesheets:
     # app/assets/javascripts/pageflow/editor.js
     //= require pageflow/embedded_video/editor
 
-    # app/assets/stylesheets/pageflow/application.css.scss;
+    # app/assets/stylesheets/pageflow/application.scss;
     @import "pageflow/embedded_video";
 
-    # app/assets/stylesheets/pageflow/editor.css.scss;
+    # app/assets/stylesheets/pageflow/editor.scss;
     @import "pageflow/embedded_video/editor";
 
-    # app/assets/stylesheets/pageflow/themes/default.css.scss
+    # app/assets/stylesheets/pageflow/themes/default.scss
     @import "pageflow/embedded_video/themes/default";
 
 ## Configuration
@@ -57,7 +57,6 @@ If you run into problems while installing the page type, please also refer to th
 page in the [Pageflow  repository](https://github.com/codevise/pageflow). If that
 doesn't help, consider
 [filing an issue](https://github.com/codevise/pageflow-embedded-video/issues).
-
 
 ## Contributing Locales
 

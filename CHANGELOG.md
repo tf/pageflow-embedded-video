@@ -1,8 +1,10 @@
 # CHANGELOG
 
-### Unreleased Changes
+### Version 1.0.0
 
-[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/v0.3.0...master)
+2017-08-11
+
+[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/0-3-stable...v1.0.0)
 
 - Do not declare bin stubs as executables in gemspec
   ([#17](https://github.com/codevise/pageflow-embedded-video/pull/17))

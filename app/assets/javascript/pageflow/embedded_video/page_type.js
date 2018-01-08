@@ -39,7 +39,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
 
     pageElement.toggleClass('page-with_split_layout', allowSplitLayout);
 
-    var splitLayout = this.wideEnoughForSplitLayout(pageElement) && allowSplitLayout;
+    var splitLayout = pageflow.pageSplitLayout.pageIsWideEnough(pageElement) && allowSplitLayout;
 
     iframeWrapper.add(scroller).toggleClass('widescreened', splitLayout);
 
@@ -67,21 +67,6 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     }
 
     scroller.scroller('refresh');
-  },
-
-  wideEnoughForSplitLayout: function(pageElement) {
-    var pageTitle = pageElement.find('.page_header .title');
-
-    var pageTitleClientRect = pageTitle[0].getBoundingClientRect();
-    var pageClientRect = pageElement[0].getBoundingClientRect();
-
-    var spaceRightFromTitle = pageClientRect.right - pageTitleClientRect.right;
-    var spaceLeftFromTitle = pageTitleClientRect.left - pageClientRect.left;
-    var leftPositionedEmbedWidth = pageClientRect.width * 0.51;
-    var rightPositionedEmbedWidth = pageClientRect.width * 0.55;
-
-    return (spaceLeftFromTitle >= leftPositionedEmbedWidth ||
-            spaceRightFromTitle >= rightPositionedEmbedWidth);
   },
 
   prepare: function(pageElement, configuration) {},

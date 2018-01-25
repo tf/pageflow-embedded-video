@@ -87,7 +87,7 @@
       position: absolute;
       width: 45%;
       max-height: 600px;
-      right: 10%;
+      @include position-end(10%);
       margin-top: 0;
       top: 50%;
       @include transform(translate(0,-50%));
@@ -111,8 +111,8 @@
     }
 
     .text_position_right &.widescreened {
-      right: auto;
-      left: 8%;
+      @include position-end(auto);
+      @include position-start(8%);
       width: 42%;
     }
 

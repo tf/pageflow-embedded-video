@@ -183,7 +183,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
         width: '100%',
         videoId: that._getVideoId(url),
         playerVars: {
-          rel: false,
+          rel: '0',
           start: that._getVideoStartTime(url)
         },
         events: {

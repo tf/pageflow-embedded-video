@@ -206,6 +206,8 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     uri.filename(that._getVideoId(url));
     uri.search({api: '1', player_id: this.playerId});
 
+    uri.fragment(new URI(url).fragment());
+
     $(iframe).attr({
       id: this.playerId,
       width: '100%',

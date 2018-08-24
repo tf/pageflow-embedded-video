@@ -3,4 +3,17 @@
 //= require ./URI.js
 //= require ./froogaloop.js
 
-pageflow.embeddedVideo = pageflow.embeddedVideo || {};
+pageflow.embeddedVideo = {
+  providerFromUrl: function(url) {
+    var domain = new URI(url).domain(true);
+
+    if (['youtu.be', 'youtube.com'].indexOf(domain) >= 0) {
+      return 'youtube';
+    }
+    else if (domain === 'vimeo.com') {
+      return 'vimeo';
+    }
+
+    return '';
+  }
+};

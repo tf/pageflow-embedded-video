@@ -19,7 +19,8 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
 
       inputForProvider('vimeo', this, 'embedded_video_hide_info', pageflow.CheckBoxInputView);
       inputForProvider('vimeo', this, 'embedded_video_hide_controls', pageflow.CheckBoxInputView, {
-        disabled: true
+        disabled: true,
+        displayUncheckedIfDisabled: true
       });
 
       this.input('video_caption', pageflow.TextInputView);

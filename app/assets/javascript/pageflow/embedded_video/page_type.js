@@ -122,7 +122,9 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     }
 
     if (this.active) {
-      if (configuration.hasChanged('display_embedded_video_url')) {
+      if (configuration.hasChanged('display_embedded_video_url') ||
+          configuration.hasChanged('embedded_video_hide_info') ||
+          configuration.hasChanged('embedded_video_hide_controls')) {
         this._removePlayer(pageElement, function() {
           that._createPlayer(pageElement, configuration.attributes);
         });
@@ -139,15 +141,15 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
   _createPlayer: function(pageElement, configuration) {
     var that = this,
         url = configuration.display_embedded_video_url,
-        origin = this._urlOrigin(url);
+        provider = pageflow.embeddedVideo.providerFromUrl(url);
 
-    if (origin === 'youtube') {
+    if (provider === 'youtube') {
       this.ytApiInitialize().done(function () {
-        that._createYouTubePlayer(pageElement, url);
+        that._createYouTubePlayer(pageElement, url, configuration);
       });
     }
-    else if (origin == 'vimeo') {
-      that._createVimeoPlayer(pageElement, url);
+    else if (provider == 'vimeo') {
+      that._createVimeoPlayer(pageElement, url, configuration);
     }
   },
 
@@ -168,7 +170,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     return window.youtubeInitialized;
   },
 
-  _createYouTubePlayer: function(pageElement, url) {
+  _createYouTubePlayer: function(pageElement, url, configuration) {
     var that = this,
         div = document.createElement('div');
 
@@ -183,8 +185,10 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
         width: '100%',
         videoId: that._getVideoId(url),
         playerVars: {
-          rel: false,
-          start: that._getVideoStartTime(url)
+          rel: '0',
+          start: that._getVideoStartTime(url),
+          controls: configuration.embedded_video_hide_controls ? '0' : '1',
+          showinfo: configuration.embedded_video_hide_info ? '0' : '1',
         },
         events: {
           'onReady': function(event) {
@@ -196,7 +200,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     });
   },
 
-  _createVimeoPlayer: function(pageElement, url) {
+  _createVimeoPlayer: function(pageElement, url, configuration) {
     var that = this,
         iframe = document.createElement('iframe'),
         uri = new URI('//player.vimeo.com/video/');
@@ -204,7 +208,15 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     this.playerId = 'vimeo-player-' + this._getRandom(url);
 
     uri.filename(that._getVideoId(url));
-    uri.search({api: '1', player_id: this.playerId});
+    uri.search({
+      api: '1',
+      player_id: this.playerId,
+      byline: configuration.embedded_video_hide_info ? '0' : '1',
+      title: configuration.embedded_video_hide_info ? '0' : '1',
+      portrait: configuration.embedded_video_hide_info ? '0' : '1'
+    });
+
+    uri.fragment(new URI(url).fragment());
 
     $(iframe).attr({
       id: this.playerId,
@@ -264,7 +276,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
       containerAndCloseButton = pageElement.find('.iframe_container, .close_button'),
       url = configuration.display_embedded_video_url;
 
-    $div.addClass('iframe_overlay ' + this._urlOrigin(url));
+    $div.addClass('iframe_overlay ' + pageflow.embeddedVideo.providerFromUrl(url));
 
     this._setBackgroundImage(url, $div);
     pageHeader.after($div);
@@ -277,35 +289,21 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
   },
 
   _setBackgroundImage: function(url, element) {
-    var origin = this._urlOrigin(url),
+    var provider = pageflow.embeddedVideo.providerFromUrl(url),
         videoId = this._getVideoId(url),
         imageUrl = '';
 
-    if (origin === 'youtube') {
+    if (provider === 'youtube') {
       imageUrl = 'http://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
       element.css('background-image', 'url("' + imageUrl + '")');
     }
-    else if (origin === 'vimeo') {
+    else if (provider === 'vimeo') {
       var src = "http://vimeo.com/api/v2/video/" + videoId + ".json";
 
       $.getJSON(src, function(data) {
         element.css('background-image', 'url("' + data[0].thumbnail_large + '")');
       });
     }
-  },
-
-  _urlOrigin: function(url) {
-    var uri = new URI(url),
-      domain = uri.domain(true);
-
-    if (['youtu.be', 'youtube.com'].indexOf(domain) >= 0) {
-      return 'youtube';
-    }
-    else if (domain === 'vimeo.com') {
-      return 'vimeo';
-    }
-
-    return '';
   },
 
   _getVideoId: function(url) {
@@ -347,6 +345,9 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
     if (timestamp.match(/\d+m(\d+s)?/)) {
       var parts = timestamp.split('m');
       return parseInt(parts[0], 10) * 60 + parseInt(parts[1] || 0, 10);
+    }
+    else if (timestamp.match(/\d+s/)) {
+      return parseInt(timestamp || 0, 10);
     }
     else {
       return 0;

@@ -13,6 +13,16 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
         required: true,
         permitHttps: true
       });
+
+      inputForProvider('youtube', this, 'embedded_video_hide_info', pageflow.CheckBoxInputView);
+      inputForProvider('youtube', this, 'embedded_video_hide_controls', pageflow.CheckBoxInputView);
+
+      inputForProvider('vimeo', this, 'embedded_video_hide_info', pageflow.CheckBoxInputView);
+      inputForProvider('vimeo', this, 'embedded_video_hide_controls', pageflow.CheckBoxInputView, {
+        disabled: true,
+        displayUncheckedIfDisabled: true
+      });
+
       this.input('video_caption', pageflow.TextInputView);
       this.input('full_width', pageflow.CheckBoxInputView);
       this.group('background');
@@ -25,5 +35,18 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
     this.tab('options', function() {
       this.group('options');
     });
+
+    function inputForProvider(provider, view, propertyName, inputView, options) {
+      view.input(propertyName, inputView, _.extend({
+        attributeTranslationKeyPrefixes: [
+          'pageflow.embedded_video.page_attributes.' + provider,
+          'pageflow.embedded_video.page_attributes'
+        ],
+        visibleBinding: 'display_embedded_video_url',
+        visible: function(url) {
+          return pageflow.embeddedVideo.providerFromUrl(url) === provider;
+        }
+      }, options));
+    }
   }
 });

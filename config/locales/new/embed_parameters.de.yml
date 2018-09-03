@@ -1,0 +1,18 @@
+de:
+  pageflow:
+    embedded_video:
+      page_attributes:
+        embedded_video_hide_info:
+          label: "Titel in Embed ausblenden"
+        embedded_video_hide_controls:
+          label: "Steuerelemente ausblenden"
+        youtube:
+          embedded_video_hide_info:
+            inline_help: "Blendet Video Titel und Player-Aktionen innerhalb des Embeds aus."
+          embedded_video_hide_controls:
+            inline_help: "Blendet die YouTube-Steuerelemente aus. Das Video kann per Klick gestartet und pausiert werden."
+        vimeo:
+          embedded_video_hide_info:
+            inline_help: "Blendet Titel und Author Informationen innerhalb des Embeds aus. Der Besitzer des Vimeo-Videos kann das Ausblenden dieser Informationen verbieten. Die Option ist dann ohne Funktion."
+          embedded_video_hide_controls:
+            inline_help: "Diese Option steht für Vimeo-Videos nicht zur Verfügung. Abhängig vom Plan des Vimeo-Kontos des Videos, können die Controls in den Embed-Einstellungen des Videos in der Vimeo-Oberfläche ausgeschaltet werden."

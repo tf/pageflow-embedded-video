@@ -1,0 +1,18 @@
+en:
+  pageflow:
+    embedded_video:
+      page_attributes:
+        embedded_video_hide_info:
+          label: "Hide title in embed"
+        embedded_video_hide_controls:
+          label: "Hide controls"
+        youtube:
+          embedded_video_hide_info:
+            inline_help: "Hides the video title and player actions inside the embed."
+          embedded_video_hide_controls:
+            inline_help: "Hides the YouTube player controls. The video can be played and paused via click."
+        vimeo:
+          embedded_video_hide_info:
+            inline_help: "Hides the video title and author info inside the embed. The owner of the video can forbid hiding these elements. This option then has no effect."
+          embedded_video_hide_controls:
+            inline_help: "This option is not supported by Vimeo video embeds. Depending on the plan of the video's Vimeo account, controls can be hidden via the video's embed settings in the Vimeo web interface."

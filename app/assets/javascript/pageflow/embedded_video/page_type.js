@@ -187,8 +187,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
         playerVars: {
           rel: '0',
           start: that._getVideoStartTime(url),
-          controls: configuration.embedded_video_hide_controls ? '0' : '1',
-          showinfo: configuration.embedded_video_hide_info ? '0' : '1',
+          controls: configuration.embedded_video_hide_controls ? '0' : '1'
         },
         events: {
           'onReady': function(event) {

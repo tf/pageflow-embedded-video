@@ -8,7 +8,7 @@ en:
           label: "Hide controls"
         youtube:
           embedded_video_hide_info:
-            inline_help: "Hides the video title and player actions inside the embed."
+            inline_help: "This option is not supported by YouTube video embeds."
           embedded_video_hide_controls:
             inline_help: "Hides the YouTube player controls. The video can be played and paused via click."
         vimeo:

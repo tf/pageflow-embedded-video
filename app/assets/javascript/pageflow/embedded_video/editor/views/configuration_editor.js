@@ -14,7 +14,10 @@ pageflow.ConfigurationEditorView.register('embedded_video', {
         permitHttps: true
       });
 
-      inputForProvider('youtube', this, 'embedded_video_hide_info', pageflow.CheckBoxInputView);
+      inputForProvider('youtube', this, 'embedded_video_hide_info', pageflow.CheckBoxInputView, {
+        disabled: true,
+        displayUncheckedIfDisabled: true
+      });
       inputForProvider('youtube', this, 'embedded_video_hide_controls', pageflow.CheckBoxInputView);
 
       inputForProvider('vimeo', this, 'embedded_video_hide_info', pageflow.CheckBoxInputView);

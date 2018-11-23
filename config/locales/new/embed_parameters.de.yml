@@ -8,7 +8,7 @@ de:
           label: "Steuerelemente ausblenden"
         youtube:
           embedded_video_hide_info:
-            inline_help: "Blendet Video Titel und Player-Aktionen innerhalb des Embeds aus."
+            inline_help: "Diese Option steht für YouTube-Videos nicht zur Verfügung."
           embedded_video_hide_controls:
             inline_help: "Blendet die YouTube-Steuerelemente aus. Das Video kann per Klick gestartet und pausiert werden."
         vimeo:

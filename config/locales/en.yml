@@ -11,6 +11,21 @@ en:
         page_type:
           menu_item: Embedded Video
           text: "# Embedded Video\n\n*Embeds an external video from Youtube or Vimeo*\n    \nIf you want to use external videos beside your own material, you can embed the video-URL and give it a caption. For technical reasons the video is embedded in a frame, that is fitting only parts of the  screen. You can therefore add a background-image/video, which creates a visual frame. You can use videos from Youtube and Vimeo.\n\nExamples of application: integration of playlists, trailer or short movies"
+      page_attributes:
+        embedded_video_hide_controls:
+          label: Hide controls
+        embedded_video_hide_info:
+          label: Hide title in embed
+        vimeo:
+          embedded_video_hide_controls:
+            inline_help: This option is not supported by Vimeo video embeds. Depending on the plan of the video's Vimeo account, controls can be hidden via the video's embed settings in the Vimeo web interface.
+          embedded_video_hide_info:
+            inline_help: Hides the video title and author info inside the embed. The owner of the video can forbid hiding these elements. This option then has no effect.
+        youtube:
+          embedded_video_hide_controls:
+            inline_help: Hides the YouTube player controls. The video can be played and paused via click.
+          embedded_video_hide_info:
+            inline_help: This option is not supported by YouTube video embeds.
       page_type_category_name: Media
       page_type_description: Embed YouTube or Vimeo videos
       page_type_name: Embedded Video

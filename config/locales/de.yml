@@ -11,6 +11,21 @@ de:
         page_type:
           menu_item: Embedded Video
           text: "# Embedded Video\n\n*Bettet ein externes Video von YouTube oder Vimeo ein*\n    \nFalls Du neben eigenem Filmmaterial auch externe Videos verwenden möchtest, kannst\nDu diese über eine Video-URL integrieren und zudem mit einer Bildunterschrift versehen.\nAus technischen Gründen wird das Bild in einem Rahmen in die Seite\neingebunden, der sich der Größe des Bildschirms und dem Textfluss automatisch anpasst, ihn aber nie komplett ausfüllt.\nDeshalb besteht bei diesem Seitentyp die Möglichkeit, ein zusätzliches Hintergrund-Bild/Video\neinzufügen, beispielsweise um einen visuellen Rahmen zu schaffen.\n\nEs können Videos der beiden Plattformen YouTube und Vimeo verwendet werden.\n\nTypische Anwendungsbeispiele: Einbinden von Playlists, Trailern, Kurzfilmen"
+      page_attributes:
+        embedded_video_hide_controls:
+          label: Steuerelemente ausblenden
+        embedded_video_hide_info:
+          label: Titel in Embed ausblenden
+        vimeo:
+          embedded_video_hide_controls:
+            inline_help: Diese Option steht für Vimeo-Videos nicht zur Verfügung. Abhängig vom Plan des Vimeo-Kontos des Videos, können die Controls in den Embed-Einstellungen des Videos in der Vimeo-Oberfläche ausgeschaltet werden.
+          embedded_video_hide_info:
+            inline_help: Blendet Titel und Author Informationen innerhalb des Embeds aus. Der Besitzer des Vimeo-Videos kann das Ausblenden dieser Informationen verbieten. Die Option ist dann ohne Funktion.
+        youtube:
+          embedded_video_hide_controls:
+            inline_help: Blendet die YouTube-Steuerelemente aus. Das Video kann per Klick gestartet und pausiert werden.
+          embedded_video_hide_info:
+            inline_help: Diese Option steht für YouTube-Videos nicht zur Verfügung.
       page_type_category_name: Media
       page_type_description: Bettet ein externes Video von YouTube oder Vimeo ein
       page_type_name: Embedded Video

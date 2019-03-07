@@ -1,11 +1,11 @@
 @include pageflow-page-type(embedded_video);
 
 .embedded_video_page {
-  .contentText {
+  .page_text {
     margin-top: 40px;
   }
 
-  .widescreened .contentText {
+  .widescreened .page_text {
     margin-top: 0;
   }
 

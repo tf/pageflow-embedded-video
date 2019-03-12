@@ -293,11 +293,11 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', {
         imageUrl = '';
 
     if (provider === 'youtube') {
-      imageUrl = 'http://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
+      imageUrl = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg';
       element.css('background-image', 'url("' + imageUrl + '")');
     }
     else if (provider === 'vimeo') {
-      var src = "http://vimeo.com/api/v2/video/" + videoId + ".json";
+      var src = "https://vimeo.com/api/v2/video/" + videoId + ".json";
 
       $.getJSON(src, function(data) {
         element.css('background-image', 'url("' + data[0].thumbnail_large + '")');

@@ -342,7 +342,7 @@ pageflow.react.registerPageTypeWithDefaultBackground('embedded_video', _.extend(
       var parts = timestamp.split('m');
       return parseInt(parts[0], 10) * 60 + parseInt(parts[1] || 0, 10);
     }
-    else if (timestamp.match(/\d+s/)) {
+    else if (timestamp.match(/\d+s?/)) {
       return parseInt(timestamp || 0, 10);
     }
     else {

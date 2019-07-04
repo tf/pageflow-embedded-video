@@ -1,1 +1,11 @@
+$embedded-video-caption-typography: () !default;
+
 @include pageflow-page-type-pictograms("embedded_video");
+
+.embedded_video_page {
+  .video_caption {
+    @include typography(
+      $embedded-video-caption-typography
+    );
+  }
+}

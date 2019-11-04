@@ -1,14 +1,11 @@
 # CHANGELOG
 
-### Version 1.7.0
+### Unreleased Changes
 
-2019-11-04
+[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/1-7-stable...master)
 
-[Compare changes](https://github.com/codevise/pageflow-embedded-video/compare/1-6-stable...v1.7.0)
-
-- Extend pageflow version requirement to < 16
-  ([#36](https://github.com/codevise/pageflow-embedded-video/pull/36))
+None so far.
 
 See
-[1-6-stable branch](https://github.com/codevise/pageflow-embedded-video/blob/1-6-stable/CHANGELOG.md)
+[1-7-stable branch](https://github.com/codevise/pageflow-embedded-video/blob/1-7-stable/CHANGELOG.md)
 for previous changes.
